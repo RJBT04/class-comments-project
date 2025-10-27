@@ -5,8 +5,12 @@
 
 This repository is designed for students to submit comments and feedback.
 
-## Folder Structure
+## What you need to do
 - `student_submissions/` - Each student creates a folder with their name and adds their work.
+
+## Folder Structure
+- - Start by reading and performimng the tasks in the Instructions.
+- - Next read and perform the tasks in Student Tasks.
 
 ## GitHub Pages
 Documentation is available at: [GitHub Pages](https://rjbt04.github.io/class-comments-project)
