@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  path-guard:
+    name: Path guard & basic checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Determine changed files
+        id: diff
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE_SHA="${{ github.event.pull_request.base.sha }}"
+            HEAD_SHA="${{ github.event.pull_request.head.sha }}"
+          else
+            BASE_SHA="${{ github.sha }}^"
+            HEAD_SHA="${{ github.sha }}"
+          fi
+          echo "BASE_SHA=$BASE_SHA" >> $GITHUB_OUTPUT
+          echo "HEAD_SHA=$HEAD_SHA" >> $GITHUB_OUTPUT
+          git diff --name-only "$BASE_SHA" "$HEAD_SHA" | tee changed_files.txt
+      - name: Enforce allowed paths on PRs
+        if: ${{ github.event_name == 'pull_request' }}
+        run: |
+          ALLOWED_REGEX='^(docs/comments\.md|submissions/.*|\.github/PULL_REQUEST_TEMPLATE\.md)$'
+          DISALLOWED=$(grep -Ev "$ALLOWED_REGEX" changed_files.txt || true)
+          if [ -n "$DISALLOWED" ]; then
+            echo "::error::This PR changes files outside allowed paths. Allowed: docs/comments.md, submissions/**"
+            echo "$DISALLOWED"
+            exit 1
+          fi
+      - name: Basic check
+        run: echo "✅ CI completed"
