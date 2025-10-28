@@ -3,40 +3,7 @@
 This repository supports a class exercise where students practice creating pull requests against a shared file.
 
 ---
-## Part A — Instructor setup (once)
-
-1. **Create the repository**
-   - Create **RJBT04/class-comments-project** (Public). Initialize with a README (optional).
-
-2. **Add starter files**
-   - Easiest: upload the provided ZIP to GitHub (Add file → Upload files) and commit to `main`.
-   - Or clone locally and copy the files, then push to GitHub.
-
-3. **Enable GitHub Pages**
-   - Go to **Settings → Pages**.
-   - **Build and deployment** → *Source*: **Deploy from a branch**.
-   - Select **Branch: `main`** and **Folder: `/docs`**. Save.
-   - Your site will publish at **https://rjbt04.github.io/class-comments-project** within a few minutes.
-
-4. **Protect `main`**
-   - Go to **Settings → Branches → Add rule**.
-   - Rule pattern: `main`.
-   - Check:
-     - ✅ **Require a pull request before merging** (set **Required approvals**: 1)
-     - ✅ **Require review from Code Owners** (uses `.github/CODEOWNERS`)
-     - ✅ **Require status checks to pass** → select **CI** workflow
-     - ✅ **Do not allow bypassing the above settings** (recommended)
-     - ✅ **Restrict who can push to matching branches** → allow only maintainers (prevents direct pushes)
-   - Save changes.
-
-5. **(Optional) Enable Discussions**
-   - Settings → General → Enable Discussions.
-
-6. **Test**
-   - Open a small PR that edits `docs/comments.md` to verify checks & review flow.
-
----
-## Part B — Student instructions
+## Student instructions
 
 > Goal: append your comment block to the shared page and submit a Pull Request.
 
